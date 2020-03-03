@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Property;
+use Image;
+use Storage;
 
 class PropertiesController extends Controller
 {
@@ -15,7 +17,7 @@ class PropertiesController extends Controller
      */
     public function index()
     {
-        $properties = Property::all();
+        $properties = Property::orderBy('updated_at', 'desc')->get();
 
         return response()->view('admin.properties.index', compact('properties'));
     }
@@ -27,7 +29,11 @@ class PropertiesController extends Controller
      */
     public function create()
     {
-        return response()->view('admin.properties.create_or_edit');
+        $title = 'Create new property';
+
+        $action = action('Admin\PropertiesController@store');
+
+        return response()->view('admin.properties.create_or_edit', compact('title', 'action'));
     }
 
     /**
@@ -38,21 +44,32 @@ class PropertiesController extends Controller
      */
     public function store(Request $request)
     {
-
+     //   dd($request->all());
         $data = [
             'title' => $request->get('title'),
             'description' => $request->get('description'),
-            'data' => [
-                'price' => $request->get('price'),
-                'surface' => $request->get('surface'),
-                'rooms' => $request->get('rooms'),
-                'types' => $request->get('types'),
-                'amenities' => $request->get('amenities'),
-                'securities' => $request->get('securities'),
-            ],
+            'price' => $request->get('price'),
+            'surface' => $request->get('surface'),
+            'rooms' => $request->get('rooms'),
+            'types' => $request->get('types'),
+            'amenities' => $request->get('amenities'),
+            'securities' => $request->get('securities'),
         ];
 
-        Property::create($data);
+        $property = Property::create($data);
+
+        foreach ($request->images as $image) {
+            $name = $image->getClientOriginalName();
+            $img = Image::make($image);
+            $img->resize(500, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            $path = Storage::put("{$property->id}/$name", $image);
+
+            $data['images'] = $path;
+        }
+
+        $property->update($data);
 
         return redirect()->action('Admin\PropertiesController@index');
     }
@@ -76,7 +93,13 @@ class PropertiesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $property = Property::findOrFail($id);
+
+        $title = 'Edit property';
+
+        $action = action('Admin\PropertiesController@update', $property->id);
+
+        return response()->view('admin.properties.create_or_edit', compact('property', 'title', 'action'));
     }
 
     /**
@@ -88,7 +111,35 @@ class PropertiesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = [
+            'title' => $request->get('title'),
+            'description' => $request->get('description'),
+            'price' => $request->get('price'),
+            'surface' => $request->get('surface'),
+            'rooms' => $request->get('rooms'),
+            'types' => $request->get('types'),
+            'amenities' => $request->get('amenities'),
+            'securities' => $request->get('securities'),
+        ];
+
+        $property = Property::findOrFail($id);
+
+        if ($request->has('images')) {
+            foreach ($request->images as $image) {
+                $name = $image->getClientOriginalName();
+                $img = Image::make($image);
+                $img->resize(500, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+                $path = Storage::put("{$property->id}", $image);
+
+                $data['images'][] = $path;
+            }
+        }
+
+        $property->update($data);
+
+        return redirect()->action('Admin\PropertiesController@index');
     }
 
     /**
@@ -99,6 +150,10 @@ class PropertiesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $property = Property::findOrFail($id);
+
+        $property->delete();
+
+        return redirect()->action('Admin\PropertiesController@index');
     }
 }

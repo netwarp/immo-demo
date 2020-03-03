@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-2 sidebar">
                 <ul>
-                    <li><a href="#">Home</a></li>
+                    <li><a href="{{ action('Admin\AdminController@index') }}">Home</a></li>
                     <li><a href="{{ action('Admin\PropertiesController@index') }}">Properties</a></li>
                 </ul>
             </div>

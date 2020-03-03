@@ -64,46 +64,57 @@
 @section('sub-content')
     <div class="container-fluid">
         <div class="card">
-            <div class="card-header">
-                <h1 class="h2">Create new property</h1>
+            <div class="card-header d-flex justify-content-between">
+                <h1 class="h2">{{ $title }}</h1>
+
+                @if (isset($property))
+                    <form method="POST" action="{{ action('Admin\PropertiesController@destroy', $property->id) }}">
+                        @csrf
+                        @method('delete')
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                @endif
             </div>
             <div class="card-body">
-                <form method="POST" action="{{ action('Admin\PropertiesController@store') }}">
+                <form method="POST" action="{{ $action }}" enctype="multipart/form-data">
                     @csrf
+                    @if (Str::contains(Route::currentRouteAction(), 'edit'))
+                        @method('put')
+                    @endif
                     <h2 class="h3">Information</h2>
 
                     <div class="form-group row">
                         <span class="col-sm-1 col-form-label">Title</span>
                         <div class="col-sm">
-                            <input type="text" class="form-control" name="title">
+                            <input type="text" class="form-control" name="title" value="{{ $property->title ?? '' }}">
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <span class="col-sm-1 col-form-label">Prix</span>
                         <div class="col-sm">
-                            <input type="number" class="form-control" name="price">
+                            <input type="number" class="form-control" name="price" value="{{ $property->price ?? '' }}">
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <span class="col-sm-1 col-form-label">Surface</span>
                         <div class="col-sm">
-                            <input type="number" class="form-control" name="surface">
+                            <input type="number" class="form-control" name="surface" value="{{ $property->surface ?? '' }}">
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <span class="col-sm-1 col-form-label">Nombre de pièces</span>
                         <div class="col-sm">
-                            <input type="number" class="form-control" name="rooms">
+                            <input type="number" class="form-control" name="rooms" value="{{ $property->rooms ?? '' }}">
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <span class="col-sm-1 col-form-label">Description</span>
                         <div class="col-sm mb-3">
-                            <textarea name="description" cols="30" rows="10" class="form-control"></textarea>
+                            <textarea name="description" cols="30" rows="10" class="form-control">{{ $property->description ?? '' }}</textarea>
                         </div>
                     </div>
 
@@ -116,7 +127,7 @@
                                     @foreach($row as $item)
                                         <div class="my-1">
                                             <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="{{ Str::slug($item) }}" name="types[{{ $item }}]">
+                                                <input type="checkbox" class="custom-control-input" id="{{ Str::slug($item) }}" name="types[{{ $item }}]" {{ isset($property->types[$item]) ? 'checked' : '' }}>
                                                 <label class="custom-control-label" for="{{ Str::slug($item) }}">{{ $item }}</label>
                                             </div>
                                         </div>
@@ -138,7 +149,7 @@
                                         @foreach($row as $item)
                                             <div class="my-1">
                                                 <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="{{ Str::slug($item) }}" name="amenities[{{ $item }}]">
+                                                    <input type="checkbox" class="custom-control-input" id="{{ Str::slug($item) }}" name="amenities[{{ $item }}]" {{ isset($property->amenities[$item]) ? 'checked' : '' }}>
                                                     <label class="custom-control-label" for="{{ Str::slug($item) }}">{{ $item }}</label>
                                                 </div>
                                             </div>
@@ -160,7 +171,7 @@
                                         @foreach($row as $item)
                                             <div class="my-1">
                                                 <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="{{ Str::slug($item) }}" name="securities[{{ $item }}]">
+                                                    <input type="checkbox" class="custom-control-input" id="{{ Str::slug($item) }}" name="securities[{{ $item }}]" {{ isset($property->securities[$item]) ? 'checked' : '' }}>
                                                     <label class="custom-control-label" for="{{ Str::slug($item) }}">{{ $item }}</label>
                                                 </div>
                                             </div>
@@ -183,8 +194,11 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="file-container">
-                                            <input type="file" accept=".png, .jpg, .jpeg" class="file-input" id="file-input-{{ $i }}">
+                                            <input type="file" accept=".png, .jpg, .jpeg" class="file-input" id="file-input-{{ $i }}" name="images[]">
                                         </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        {{ $property->images[$i] ?? '' }}
                                     </div>
                                 </div>
                             </div>

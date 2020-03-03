@@ -6,7 +6,7 @@
            <div class="my-2">
                <a href="{{ action('Admin\PropertiesController@create') }}" class="btn btn-primary">Create new property</a>
            </div>
-            <table class="table">
+            <table class="table table-striped">
                 <thead>
                     <tr>
                         <th>Preview</th>
@@ -19,7 +19,7 @@
                     @foreach($properties as $property)
                         <tr>
                             <td>{{ $property->preview ?? '' }}</td>
-                            <td>{{ $property->title ?? '' }}</td>
+                            <td><a href="{{ action('Admin\PropertiesController@edit', $property->id) }}">{{ $property->title ?? '' }}</a></td>
                             <td></td>
                             <td>{{ $property->created_at ?? '' }}</td>
                         </tr>
