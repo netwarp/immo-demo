@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+//use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\Model;
 
 class Property extends Model
 {
-    protected $table = 'properties';
+    protected $connection = 'mongodb';
+
+    protected $collection = 'properties';
 
     protected $fillable = [
         'title',

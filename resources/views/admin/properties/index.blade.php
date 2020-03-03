@@ -20,6 +20,8 @@
                         <tr>
                             <td>{{ $property->preview ?? '' }}</td>
                             <td>{{ $property->title ?? '' }}</td>
+                            <td></td>
+                            <td>{{ $property->created_at ?? '' }}</td>
                         </tr>
                     @endforeach
                 </tbody>
