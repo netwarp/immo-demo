@@ -1,0 +1,31 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+// admin
+.sidebar {
+    background: $indigo;
+    padding: 0;
+    min-height: 87vh;
+
+    ul {
+        margin: 0;
+        padding: 0;
+
+        li {
+            list-style-type: none;
+
+            a {
+                color: #fff;
+                width: 100%;
+                display: block;
+                padding: 1rem;
+            }
+        }
+    }
+}
