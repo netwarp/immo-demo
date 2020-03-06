@@ -1,20 +1,9 @@
-function getBase64(file) {
-    var reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = function () {
-        console.log(reader.result);
-    };
-    reader.onerror = function (error) {
-        console.log('Error: ', error);
-    };
-}
+document.querySelectorAll('.remove').forEach((remove_btn) => {
+    remove_btn.addEventListener('click', (event) => {
+        const index = event.target.closest('.img-upload').getAttribute('id');
 
-const file_inputs = document.querySelectorAll('.file-input');
+        event.target.closest('.img-upload').innerHTML = `<input type="file" name="images[]" accept="image/*" id="input-image-{{ $i }}">`
 
-for (let file_input of file_inputs) {
-    file_input.addEventListener('change', async (event) => {
-        console.log(await getBase64(event.target));
+
     });
-}
-
-
+});

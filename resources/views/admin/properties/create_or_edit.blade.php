@@ -91,6 +91,20 @@
                     </div>
 
                     <div class="form-group row">
+                        <span class="col-sm-1 col-form-label">City</span>
+                        <div class="col-sm">
+                            <input type="text" class="form-control" name="city" value="{{ $property->city ?? '' }}" placeholder="Example (Paris)">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <span class="col-sm-1 col-form-label">Department</span>
+                        <div class="col-sm">
+                            <input type="text" class="form-control" name="department" value="{{ $property->department ?? '' }}" placeholder="Example 75001">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
                         <span class="col-sm-1 col-form-label">Prix</span>
                         <div class="col-sm">
                             <input type="number" class="form-control" name="price" value="{{ $property->price ?? '' }}">
@@ -98,7 +112,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <span class="col-sm-1 col-form-label">Surface</span>
+                        <span class="col-sm-1 col-form-label">Surface <small>(m²)</small></span>
                         <div class="col-sm">
                             <input type="number" class="form-control" name="surface" value="{{ $property->surface ?? '' }}">
                         </div>
@@ -185,24 +199,26 @@
                     <hr>
 
                     <h2 class="h4">Photos</h2>
-                    <div class="row">
-                        @for($i = 0; $i < 10; $i++)
-                            <div class="col-md-4 mb-3">
-                                <div class="card">
-                                    <div class="card-header">
-                                        Image {{ $i + 1 }} {{ $i == 0 ? '(Image principale)' : '' }}
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="file-container">
-                                            <input type="file" accept=".png, .jpg, .jpeg" class="file-input" id="file-input-{{ $i }}" name="images[]">
+                    <div class="form-group">
+                        <div class="row">
+                            @for($i=0; $i < 9; $i++)
+                                <div class="col-sm-4 d-flex flex-wrap">
+                                    <div class="card mb-3">
+                                        <div class="card-body img-upload" id="image-{{ $i }}">
+                                            @if (isset($property->images[$i]))
+                                                <div class="img-preview">
+                                                   <img src="/images/{{ $property->images[$i] }}" alt="" class="img-fluid">
+
+                                                    <div class="remove" title="Delete">X</div>
+                                                </div>
+                                            @else
+                                                <input type="file" name="images[]" accept="image/*" id="input-image-{{ $i }}">
+                                            @endif
                                         </div>
                                     </div>
-                                    <div class="card-footer">
-                                        {{ $property->images[$i] ?? '' }}
-                                    </div>
                                 </div>
-                            </div>
-                        @endfor
+                            @endfor
+                        </div>
                     </div>
 
                     <button class="btn btn-primary btn-lg btn-block">Envoyer</button>

@@ -13,6 +13,8 @@ class Property extends Model
 
     protected $fillable = [
         'title',
+        'city',
+        'department',
         'description',
         'price',
         'surface',
@@ -22,4 +24,12 @@ class Property extends Model
         'securities',
         'images',
     ];
+
+    public function preview() {
+        if (isset($this->images[0])) {
+            $first_image = $this->images[0];
+            return "/images/{$first_image}";
+        }
+        return 'e';
+    }
 }

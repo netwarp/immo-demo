@@ -18,9 +18,13 @@
                 <tbody>
                     @foreach($properties as $property)
                         <tr>
-                            <td>{{ $property->preview ?? '' }}</td>
+                            <td>
+                                <a href="{{ action('Admin\PropertiesController@edit', $property->id) }}">
+                                    <img src="{{ $property->preview() ?? '' }}" alt="" style="width: 200px;">
+                                </a>
+                            </td>
                             <td><a href="{{ action('Admin\PropertiesController@edit', $property->id) }}">{{ $property->title ?? '' }}</a></td>
-                            <td></td>
+                            <td>{{ $property->city ?? '' }} {{ $property->department ?? '' }}</td>
                             <td>{{ $property->created_at ?? '' }}</td>
                         </tr>
                     @endforeach

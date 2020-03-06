@@ -5,8 +5,8 @@
         <div class="row">
             <div class="col-md-2 sidebar">
                 <ul>
-                    <li><a href="{{ action('Admin\AdminController@index') }}">Home</a></li>
-                    <li><a href="{{ action('Admin\PropertiesController@index') }}">Properties</a></li>
+                    <li><a href="{{ action('Admin\AdminController@index') }}" class="{{ Str::contains(Route::currentRouteAction(), 'AdminController') ? 'active' : '' }}">Home</a></li>
+                    <li><a href="{{ action('Admin\PropertiesController@index') }}" class="{{ Str::contains(Route::currentRouteAction(), 'Properties') ? 'active' : '' }}">Properties</a></li>
                 </ul>
             </div>
             <div class="col-md">

@@ -31,3 +31,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.', 'mi
         'properties' => 'PropertiesController'
     ]);
 });
+
+Route::get('images/{type}/{folder}/{file}', function($type, $folder, $file) {
+    $path = storage_path("app/$type/$folder/$file");
+    $image = Image::make($path);
+    header('Content-Type: image/png');
+    return $image->response();
+});

@@ -10906,3 +10906,23 @@ a.text-dark:focus {
   padding: 1rem;
 }
 
+.sidebar ul li a.active {
+  color: #000;
+  background: #fff;
+  border-right: 6px solid #f6993f;
+}
+
+.img-upload .img-preview {
+  position: relative;
+}
+
+.img-upload .img-preview .remove {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #ddd;
+  color: #f00;
+  padding: 1rem;
+  cursor: pointer;
+}
+

@@ -10,6 +10,39 @@ use Storage;
 
 class PropertiesController extends Controller
 {
+    /*
+     * Manage the images for the functions store and update
+     */
+    private function manageImageRequest(Request $request, $data, Property $property) {
+
+        if (($request['images'])) {
+            foreach ($request['images'] as $key => $file) {
+
+                $extension = $file->extension();
+
+                $filename = $file->getClientOriginalName();
+                $filename = md5($filename);
+
+                $image = Image::make($file);
+
+                $complete_name = "$filename.$extension";
+
+                $path = "properties/$property->id/$complete_name";
+
+                $data['images'][$key] = $path;
+
+                Storage::put($path, $image->encode());
+            }
+
+            if ($request->method() === 'PUT') {
+                $updated_images = array_merge($property->images, $data['images']);
+                $data['images'] = $updated_images;
+            }
+        }
+        
+        $property->update($data);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -40,13 +73,15 @@ class PropertiesController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
      //   dd($request->all());
         $data = [
             'title' => $request->get('title'),
+            'city' => $request->get('city'),
+            'department' => $request->get('department'),
             'description' => $request->get('description'),
             'price' => $request->get('price'),
             'surface' => $request->get('surface'),
@@ -58,20 +93,9 @@ class PropertiesController extends Controller
 
         $property = Property::create($data);
 
-        foreach ($request->images as $image) {
-            $name = $image->getClientOriginalName();
-            $img = Image::make($image);
-            $img->resize(500, null, function ($constraint) {
-                $constraint->aspectRatio();
-            });
-            $path = Storage::put("{$property->id}/$name", $image);
+        $this->manageImageRequest($request, $data, $property);
 
-            $data['images'] = $path;
-        }
-
-        $property->update($data);
-
-        return redirect()->action('Admin\PropertiesController@index');
+        return redirect()->action('Admin\PropertiesController@index')->with('success', 'Property created');
     }
 
     /**
@@ -107,12 +131,15 @@ class PropertiesController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
     {
+        //dd($request->all());
         $data = [
             'title' => $request->get('title'),
+            'city' => $request->get('city'),
+            'department' => $request->get('department'),
             'description' => $request->get('description'),
             'price' => $request->get('price'),
             'surface' => $request->get('surface'),
@@ -124,36 +151,25 @@ class PropertiesController extends Controller
 
         $property = Property::findOrFail($id);
 
-        if ($request->has('images')) {
-            foreach ($request->images as $image) {
-                $name = $image->getClientOriginalName();
-                $img = Image::make($image);
-                $img->resize(500, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                });
-                $path = Storage::put("{$property->id}", $image);
+        $this->manageImageRequest($request, $data, $property);
 
-                $data['images'][] = $path;
-            }
-        }
-
-        $property->update($data);
-
-        return redirect()->action('Admin\PropertiesController@index');
+        return redirect()->action('Admin\PropertiesController@index')->with('success', 'Property updated');
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
         $property = Property::findOrFail($id);
 
+        Storage::deleteDirectory("properties/{$property->id}");
+
         $property->delete();
 
-        return redirect()->action('Admin\PropertiesController@index');
+        return redirect()->action('Admin\PropertiesController@index')->with('success', 'Property deleted');
     }
 }

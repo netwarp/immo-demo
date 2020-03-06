@@ -25,7 +25,29 @@
                 width: 100%;
                 display: block;
                 padding: 1rem;
+
+                &.active {
+                    color: #000;
+                    background: #fff;
+                    border-right: 6px solid $orange;
+                }
             }
+        }
+    }
+}
+
+.img-upload {
+    .img-preview {
+        position: relative;
+
+        .remove {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: #ddd;
+            color: #f00;
+            padding: 1rem;
+            cursor: pointer;
         }
     }
 }

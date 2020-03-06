@@ -79,5 +79,12 @@
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
     @stack('js')
+
+    @if (session('success'))
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script>
+            swal("Success", "{{ session('success') }}", "success");
+        </script>
+    @endif
 </body>
 </html>
