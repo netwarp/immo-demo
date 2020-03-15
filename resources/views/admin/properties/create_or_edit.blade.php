@@ -65,7 +65,12 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-header d-flex justify-content-between">
-                <h1 class="h2">{{ $title }}</h1>
+                <h1 class="h2 d-inline">
+                    {{ $title }}
+                    @if (isset($property))
+                        <a href="{{ action('Front\FrontController@getProperty', $property->slug) }}" class="btn btn-primary" target="_blank">view online</a>
+                    @endif
+                </h1>
 
                 @if (isset($property))
                     <form method="POST" action="{{ action('Admin\PropertiesController@destroy', $property->id) }}">

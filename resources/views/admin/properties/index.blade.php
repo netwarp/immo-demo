@@ -12,6 +12,8 @@
                         <th>Preview</th>
                         <th>Title</th>
                         <th>Location</th>
+                        <th>Price</th>
+                        <th>Surface</th>
                         <th>Created at</th>
                     </tr>
                 </thead>
@@ -24,8 +26,26 @@
                                 </a>
                             </td>
                             <td><a href="{{ action('Admin\PropertiesController@edit', $property->id) }}">{{ $property->title ?? '' }}</a></td>
-                            <td>{{ $property->city ?? '' }} {{ $property->department ?? '' }}</td>
-                            <td>{{ $property->created_at ?? '' }}</td>
+                            <td>
+                                <a href="{{ action('Admin\PropertiesController@edit', $property->id) }}">
+                                    {{ $property->city ?? '' }} {{ $property->department ?? '' }}
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{{ action('Admin\PropertiesController@edit', $property->id) }}">
+                                    {{ $property->price ?? '' }} €
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{{ action('Admin\PropertiesController@edit', $property->id) }}">
+                                    {{ $property->surface ?? '' }} €
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{{ action('Admin\PropertiesController@edit', $property->id) }}">
+                                    {{ $property->created_at ?? '' }}
+                                </a>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

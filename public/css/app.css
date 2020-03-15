@@ -10884,6 +10884,19 @@ a.text-dark:focus {
   }
 }
 
+/**
+    Front
+ */
+
+.section-top-search {
+  background: #f4f4f4;
+  padding: 2rem 0;
+}
+
+/**
+    Admin
+ */
+
 .sidebar {
   background: #6574cd;
   padding: 0;

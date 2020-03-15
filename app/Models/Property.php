@@ -13,6 +13,7 @@ class Property extends Model
 
     protected $fillable = [
         'title',
+        'slug',
         'city',
         'department',
         'description',
@@ -31,5 +32,18 @@ class Property extends Model
             return "/images/{$first_image}";
         }
         return 'e';
+    }
+
+    public function priceFormat() {
+        if (isset($this->price)) {
+            $price = (int) $this->price;
+            $price = number_format($price, 0, ',', ' ');
+            return $price;
+        }
+        return '';
+    }
+
+    public function imagesCount() {
+        return count($this->images) ?? 0;
     }
 }

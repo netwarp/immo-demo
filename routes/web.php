@@ -10,10 +10,12 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::group(['prefix' => '/', 'namespace' => 'Front', 'as' => 'front'], function() {
+    Route::get('/', 'FrontController@getIndex');
 
-Route::get('/', function () {
-    return view('welcome');
+    Route::get('property/{slug}', 'FrontController@getProperty');
 });
+
 
 Auth::routes([
     'register' => false, // Registration Routes...

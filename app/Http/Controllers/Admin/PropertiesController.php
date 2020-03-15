@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Property;
 use Image;
 use Storage;
+use Str;
 
 class PropertiesController extends Controller
 {
@@ -39,7 +40,7 @@ class PropertiesController extends Controller
                 $data['images'] = $updated_images;
             }
         }
-        
+
         $property->update($data);
     }
 
@@ -80,6 +81,7 @@ class PropertiesController extends Controller
      //   dd($request->all());
         $data = [
             'title' => $request->get('title'),
+            'slug' => Str::slug($request->get('title')),
             'city' => $request->get('city'),
             'department' => $request->get('department'),
             'description' => $request->get('description'),
@@ -138,6 +140,7 @@ class PropertiesController extends Controller
         //dd($request->all());
         $data = [
             'title' => $request->get('title'),
+            'slug' => Str::slug($request->get('title')),
             'city' => $request->get('city'),
             'department' => $request->get('department'),
             'description' => $request->get('description'),
