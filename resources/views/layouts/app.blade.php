@@ -78,6 +78,18 @@
             @yield('content')
         </main>
     </div>
+    <footer>
+        <div class="container">
+            <div class="footer-title">
+                Liens
+            </div>
+            <ul>
+                <li><a href="#">Acheter</a></li>
+                <li><a href="#">Vendre</a></li>
+                <li><a href="#">Éstimer</a></li>
+            </ul>
+        </div>
+    </footer>
     <script src="{{ asset('js/app.js') }}"></script>
     @stack('js')
 
