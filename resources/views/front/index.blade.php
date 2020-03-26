@@ -6,7 +6,7 @@
 
 @section('content')
     <section id="section-main-search">
-        <form action="" method="GET">
+        <form action="/offres" method="GET">
             <select name="type">
                 <option value="acheter">Acheter</option>
                 <option value="louer">Louer</option>
