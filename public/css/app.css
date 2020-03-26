@@ -72,7 +72,7 @@ body {
   line-height: 1.6;
   color: #212529;
   text-align: left;
-  background-color: #f8fafc;
+  background-color: #f1f1f1;
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -512,7 +512,7 @@ mark,
 
 .img-thumbnail {
   padding: 0.25rem;
-  background-color: #f8fafc;
+  background-color: #f1f1f1;
   border: 1px solid #dee2e6;
   border-radius: 0.25rem;
   max-width: 100%;
@@ -4265,15 +4265,15 @@ input[type=button].btn-block {
 }
 
 .custom-range:focus::-webkit-slider-thumb {
-  box-shadow: 0 0 0 1px #f8fafc, 0 0 0 0.2rem rgba(52, 144, 220, 0.25);
+  box-shadow: 0 0 0 1px #f1f1f1, 0 0 0 0.2rem rgba(52, 144, 220, 0.25);
 }
 
 .custom-range:focus::-moz-range-thumb {
-  box-shadow: 0 0 0 1px #f8fafc, 0 0 0 0.2rem rgba(52, 144, 220, 0.25);
+  box-shadow: 0 0 0 1px #f1f1f1, 0 0 0 0.2rem rgba(52, 144, 220, 0.25);
 }
 
 .custom-range:focus::-ms-thumb {
-  box-shadow: 0 0 0 1px #f8fafc, 0 0 0 0.2rem rgba(52, 144, 220, 0.25);
+  box-shadow: 0 0 0 1px #f1f1f1, 0 0 0 0.2rem rgba(52, 144, 220, 0.25);
 }
 
 .custom-range::-moz-focus-outer {
@@ -4479,8 +4479,8 @@ input[type=button].btn-block {
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
   color: #495057;
-  background-color: #f8fafc;
-  border-color: #dee2e6 #dee2e6 #f8fafc;
+  background-color: #f1f1f1;
+  border-color: #dee2e6 #dee2e6 #f1f1f1;
 }
 
 .nav-tabs .dropdown-menu {
@@ -10891,6 +10891,92 @@ a.text-dark:focus {
 .section-top-search {
   background: #f4f4f4;
   padding: 2rem 0;
+}
+
+#section-main-search {
+  background: #999;
+  min-height: 40vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#section-main-search form {
+  background: rgba(255, 255, 255, 0.7);
+  padding: 0.6rem;
+  border-radius: 10px;
+  border: 1px solid rgba(68, 68, 68, 0.4);
+  display: flex;
+}
+
+@media screen and (max-width: 768px) {
+  #section-main-search form {
+    flex-direction: column;
+    width: 100%;
+    margin: 2rem;
+  }
+}
+
+#section-main-search form input,
+#section-main-search form select {
+  background: #fff;
+  border: 1px solid transparent;
+  padding: 0.6rem;
+  margin: 0 0.2rem;
+}
+
+#section-main-search form button,
+#section-main-search form .button {
+  padding: 0.6rem;
+  border: 1px solid transparent;
+}
+
+#section-main-search form button[type=submit] {
+  background: #38c172;
+  color: #fff;
+  padding: 0.6rem 2rem;
+  transition: 0.4s ease all;
+}
+
+#section-main-search form button[type=submit]:hover {
+  transition: 0.4s ease all;
+  background: #2d995b;
+}
+
+.section {
+  padding: 2rem 0;
+}
+
+.offer-preview {
+  margin: 1rem 0;
+}
+
+footer {
+  background: #2a2a2a;
+  color: #fff;
+  padding: 2rem 0;
+}
+
+footer .footer-title {
+  font-size: 1.2rem;
+}
+
+footer ul {
+  margin: 0;
+  padding: 0;
+}
+
+footer ul li {
+  list-style-type: none;
+}
+
+footer ul li a {
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+footer ul li a:hover {
+  color: #fff;
 }
 
 /**
