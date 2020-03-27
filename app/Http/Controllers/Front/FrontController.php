@@ -10,7 +10,7 @@ class FrontController extends Controller
 {
     /**
      * First page
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return \Illuminate\View\View
      */
     public function getIndex() {
 
@@ -20,8 +20,30 @@ class FrontController extends Controller
     }
 
     /**
+     * @param Request $request
+     * @return \Illuminate\View\View
+     */
+    public function getOffers(Request $request) {
+        $properties = new Property;
+
+        if ($request->filled('type')) {
+            $type = $request->get('type');
+            $properties = $properties->where('type', $type);
+        }
+
+        if ($request->filled('location')) {
+            $location = $request->get('location');
+            $properties = $properties->where('location', $location);
+        }
+
+        $properties = $properties->get();
+
+        return view('front.offers', compact('properties'));
+    }
+
+    /**
      * @param $slug
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return \Illuminate\View\View
      */
     public function getProperty($slug) {
         $property = Property::where('slug', $slug)->first();

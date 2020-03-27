@@ -56,7 +56,6 @@
     ];
 
     $heating = array_chunk($heating, 5);
-
 @endphp
 
 @extends('layouts.admin')

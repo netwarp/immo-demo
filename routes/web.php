@@ -13,6 +13,8 @@
 Route::group(['prefix' => '/', 'namespace' => 'Front', 'as' => 'front'], function() {
     Route::get('/', 'FrontController@getIndex');
 
+    Route::get('offres', 'FrontController@getOffers');
+
     Route::get('property/{slug}', 'FrontController@getProperty');
 });
 
