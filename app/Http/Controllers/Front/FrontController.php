@@ -59,21 +59,21 @@ class FrontController extends Controller
         if ($request->filled('types')) {
             foreach ($request->get('types') as $key => $item)  {
                 $field = "types.{$item}";
-                $properties = $properties->where($field, 'on');
+                $properties = $properties->orWhere($field, 'on');
             }
         }
 
         if ($request->filled('amenities')) {
             foreach ($request->get('amenities') as $key => $item)  {
                 $field = "amenities.{$item}";
-                $properties = $properties->where($field, 'on');
+                $properties = $properties->orWhere($field, 'on');
             }
         }
 
         if ($request->filled('securities')) {
             foreach ($request->get('securities') as $key => $item)  {
                 $field = "securities.{$item}";
-                $properties = $properties->where($field, 'on');
+                $properties = $properties->orWhere($field, 'on');
             }
         }
 

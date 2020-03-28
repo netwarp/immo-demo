@@ -7,6 +7,7 @@
 @section('content')
     <div class="container my-4">
         <div class="row">
+            @include('front.includes.search')
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-body card-property">
@@ -35,7 +36,12 @@
                                 Surface: <b>{{ $property->surface . ' m²' ?? '' }}</b>
                             </div>
                             <div>
-                                Description: {{ $property->description }}
+                                <div class="h4">
+                                    Description:
+                                </div>
+                                <div>
+                                    {{ $property->description }}
+                                </div>
                             </div>
                             <div>
                                 <div class="h4">
@@ -74,12 +80,10 @@
                                 @endif
                             </div>
                         </div>
-
                     </div>
                 </div>
-            </div>
-            <div class="col-md">
-                <div class="card">
+
+                <div class="card mt-4">
                     <div class="card-body">
                         <div class="my-3">
                             Contact
@@ -104,6 +108,7 @@
             </div>
         </div>
     </div>
+
 @endsection
 
 @push('js')
