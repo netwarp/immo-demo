@@ -5,7 +5,7 @@
 @endpush
 
 @section('content')
-    <div class="container">
+    <div class="container my-4">
         <div class="row">
             <div class="col-md-8">
                 <div class="card">
@@ -52,7 +52,7 @@
                                 <div class="h4">
                                     Commodités
                                 </div>
-                                @forelse($property->amenities as $key => $item)
+                                @forelse($property->amenties as $key => $item)
                                     <div>
                                         {{ $key }}
                                     </div>
