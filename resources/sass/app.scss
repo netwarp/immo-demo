@@ -68,8 +68,16 @@
 .section-top-search {
     background: #fff;
     padding: 2rem 0;
+}
 
+/**
+    Page Property
+ */
 
+.card-property {
+    .img-large, .img-small {
+        cursor: pointer;
+    }
 }
 
 footer {

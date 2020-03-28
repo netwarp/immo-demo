@@ -10951,6 +10951,15 @@ a.text-dark:focus {
   padding: 2rem 0;
 }
 
+/**
+    Page Property
+ */
+
+.card-property .img-large,
+.card-property .img-small {
+  cursor: pointer;
+}
+
 footer {
   background: #2a2a2a;
   color: #fff;
