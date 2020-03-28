@@ -41,34 +41,37 @@
                                 <div class="h4">
                                     Types
                                 </div>
-                                @forelse($property->types as $key => $item)
-                                    <div>
-                                        {{ $key }}
-                                    </div>
-                                @empty
-                                @endforelse
+                                @if ($property->types)
+                                    @foreach($property->types as $key => $item)
+                                        <div>
+                                            {{ $key }}
+                                        </div>
+                                    @endforeach
+                                @endif
                             </div>
                             <div>
                                 <div class="h4">
                                     Commodités
                                 </div>
-                                @forelse($property->amenties as $key => $item)
-                                    <div>
-                                        {{ $key }}
-                                    </div>
-                                @empty
-                                @endforelse
+                                @if ($property->amenties)
+                                    @foreach($property->amenties as $key => $item)
+                                        <div>
+                                            {{ $key }}
+                                        </div>
+                                    @endforeach
+                                @endif
                             </div>
                             <div>
                                 <div class="h4">
                                     Sécurités
                                 </div>
-                                @forelse($property->securities as $key => $item)
-                                    <div>
-                                        {{ $key }}
-                                    </div>
-                                @empty
-                                @endforelse
+                                @if ($property->securities)
+                                    @foreach($property->securities as $key => $item)
+                                        <div>
+                                            {{ $key }}
+                                        </div>
+                                    @endforeach
+                                @endif
                             </div>
                         </div>
 
