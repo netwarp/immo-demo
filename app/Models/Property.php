@@ -24,6 +24,7 @@ class Property extends Model
         'amenities',
         'securities',
         'images',
+        'service'
     ];
 
     public function preview() {
@@ -44,6 +45,8 @@ class Property extends Model
     }
 
     public function imagesCount() {
-        return count($this->images) ?? 0;
+        if ($this->images) {
+            return count($this->images) ?? 0;
+        }
     }
 }

@@ -50,6 +50,7 @@
                     @endforeach
                 </tbody>
             </table>
+            {{ $properties->links() }}
         </div>
     </div>
 @endsection

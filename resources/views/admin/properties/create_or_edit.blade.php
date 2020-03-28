@@ -88,6 +88,16 @@
                     <h2 class="h3">Information</h2>
 
                     <div class="form-group row">
+                        <span class="col-sm-1 col-form-label">Service</span>
+                        <div class="col-sm">
+                            <select name="service" class="form-control">
+                                <option value="acheter">Acheter</option>
+                                <option value="louer">Louer</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
                         <span class="col-sm-1 col-form-label">Title</span>
                         <div class="col-sm">
                             <input type="text" class="form-control" name="title" value="{{ $property->title ?? '' }}">

@@ -51,7 +51,7 @@ class PropertiesController extends Controller
      */
     public function index()
     {
-        $properties = Property::orderBy('updated_at', 'desc')->get();
+        $properties = Property::orderBy('updated_at', 'desc')->paginate(20);
 
         return response()->view('admin.properties.index', compact('properties'));
     }

@@ -1,7 +1,7 @@
 <template>
     <div class="select-wrapper">
         <div class="text">
-            Pièces
+            <span>Pièces</span>
             <i class="arrow">&#752;</i>
             <i class="arrow">&#751;</i>
         </div>

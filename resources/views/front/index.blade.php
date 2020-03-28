@@ -7,14 +7,14 @@
 @section('content')
     <section id="section-main-search">
         <form action="/offres" method="GET">
-            <select name="type">
+            <select name="service">
                 <option value="acheter">Acheter</option>
                 <option value="louer">Louer</option>
             </select>
-            <input type="text" class="" name="location" placeholder="Où">
-            <input type="text" name="min" placeholder="Min m²">
-            <input type="text" name="" placeholder="Min €">
-            <input type="text" name="" placeholder="Max €">
+            <input type="text" name="city" placeholder="Où">
+            <input type="text" name="min_surface" placeholder="Min m²">
+            <input type="text" name="min_price" placeholder="Min €">
+            <input type="text" name="max_price" placeholder="Max €">
             <button type="submit">Rechercher</button>
         </form>
     </section>
@@ -23,11 +23,10 @@
         <div class="container">
             <h2>Nos dernières offres</h2>
             <div class="row">
-                @for($i = 0; $i < 6; $i++)
                 @foreach($properties as $property)
                     <div class="col-md-4">
                         <div class="card offer-preview">
-                            <div class="">
+                            <div class="" title="{{ $property->title ?? '' }}">
                                 <a href="{{ action('Front\FrontController@getProperty', $property->slug) }}" class="">
                                     <img src="{{ $property->preview() ?? '' }}" alt="" class="card-img-top">
                                 </a>
@@ -53,7 +52,6 @@
                         </div>
                     </div>
                 @endforeach
-                @endfor
             </div>
             <div class="text-center">
                 <a href="#" class="btn btn-primary btn-lg">Voir toutes nos offres</a>

@@ -38134,7 +38134,8 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "select-wrapper" }, [
       _c("div", { staticClass: "text" }, [
-        _vm._v("\n        Pièces\n        "),
+        _c("span", [_vm._v("Pièces")]),
+        _vm._v(" "),
         _c("i", { staticClass: "arrow" }, [_vm._v("˰")]),
         _vm._v(" "),
         _c("i", { staticClass: "arrow" }, [_vm._v("˯")])

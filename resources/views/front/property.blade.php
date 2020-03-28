@@ -11,9 +11,11 @@
                                 <div>
                                     <img src="{{ $property->preview() ?? '' }}" alt="" class="img-fluid">
                                 </div>
-                                @foreach($property->images as $image)
-                                    <img src="/images/{{ $image }}" alt="" class="" style="width: 120px;">
-                                @endforeach
+                                @if ($property->images)
+                                    @foreach($property->images as $image)
+                                        <img src="/images/{{ $image }}" alt="" class="" style="width: 120px;">
+                                    @endforeach
+                                @endif
                             </div>
                             <div class="col-md">
                                 <h1>{{ $property->title ?? '' }}</h1>
